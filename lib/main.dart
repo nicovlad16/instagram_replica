@@ -38,9 +38,9 @@ class _InstagramReplicaState extends State<InstagramReplica> with InitMixin<Inst
           return MaterialApp(
             title: 'Instagram Replica',
             theme: ThemeData.dark(),
-            home: const Scaffold(
+            home:  const Scaffold(
               body: Center(
-                child: CircularProgressIndicator(),
+                child: Image(image: AssetImage('assets/images/ig_logo.png')),
               ),
             ),
           );
