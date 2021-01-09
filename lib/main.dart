@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:instagram_replica/src/init/init.dart';
 import 'package:instagram_replica/src/models/index.dart';
+import 'package:instagram_replica/src/presentation/mixin/init_mixin.dart';
 import 'package:instagram_replica/src/presentation/routes.dart';
 import 'package:redux/redux.dart';
 
@@ -16,19 +16,11 @@ class InstagramReplica extends StatefulWidget {
   _InstagramReplicaState createState() => _InstagramReplicaState();
 }
 
-class _InstagramReplicaState extends State<InstagramReplica> {
-  Future<Store<AppState>> _future;
-
-  @override
-  void initState() {
-    super.initState();
-    _future = init();
-  }
-
+class _InstagramReplicaState extends State<InstagramReplica> with InitMixin<InstagramReplica> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Store<AppState>>(
-      future: _future,
+      future: future,
       builder: (BuildContext context, AsyncSnapshot<Store<AppState>> snapshot) {
         if (snapshot.hasData) {
           final Store<AppState> store = snapshot.data;
