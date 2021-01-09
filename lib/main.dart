@@ -16,7 +16,8 @@ class InstagramReplica extends StatefulWidget {
   _InstagramReplicaState createState() => _InstagramReplicaState();
 }
 
-class _InstagramReplicaState extends State<InstagramReplica> with InitMixin<InstagramReplica> {
+class _InstagramReplicaState extends State<InstagramReplica>
+    with InitMixin<InstagramReplica> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Store<AppState>>(
@@ -38,9 +39,12 @@ class _InstagramReplicaState extends State<InstagramReplica> with InitMixin<Inst
           return MaterialApp(
             title: 'Instagram Replica',
             theme: ThemeData.dark(),
-            home:  const Scaffold(
+            home: Scaffold(
               body: Center(
-                child: Image(image: AssetImage('assets/images/ig_logo.png')),
+                child: Image.asset(
+                  'assets/images/logo.png',
+                  height: 120,
+                ),
               ),
             ),
           );
