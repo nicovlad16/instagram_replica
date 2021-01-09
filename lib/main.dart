@@ -16,8 +16,7 @@ class InstagramReplica extends StatefulWidget {
   _InstagramReplicaState createState() => _InstagramReplicaState();
 }
 
-class _InstagramReplicaState extends State<InstagramReplica>
-    with InitMixin<InstagramReplica> {
+class _InstagramReplicaState extends State<InstagramReplica> with InitMixin<InstagramReplica> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Store<AppState>>(

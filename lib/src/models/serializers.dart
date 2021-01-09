@@ -5,7 +5,6 @@ import 'package:built_value/standard_json_plugin.dart';
 import 'package:instagram_replica/src/models/auth/index.dart';
 import 'package:instagram_replica/src/models/index.dart';
 
-
 part 'serializers.g.dart';
 
 @SerializersFor(<Type>[

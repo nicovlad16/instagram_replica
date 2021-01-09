@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:instagram_replica/src/presentation/home.dart';
 
-
 // ignore: avoid_classes_with_only_static_members
 class AppRoutes {
   static const String home = '/';
