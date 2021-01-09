@@ -1,0 +1,47 @@
+name: instagram_replica
+description: Instagram replica for Google Flutter Course.
+
+publish_to: 'none'
+version: 0.0.1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: 1.0.0
+
+  # flutter
+  flutter_redux: ^0.7.0
+
+  # dart
+  pedantic: ^1.9.2
+
+  http: ^0.12.2
+
+  built_value: ^7.1.0
+  built_collection: ^4.3.2
+  freezed_annotation: ^0.12.0
+
+  redux: ^4.0.0+3
+  redux_epics: ^0.14.0
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  analyzer: any
+  build_runner: any
+  built_value_generator: ^7.1.0
+  freezed: ^0.12.0
+
+dependency_overrides:
+  rxdart: ^0.25.0
+
+flutter:
+
+  uses-material-design: true
+
