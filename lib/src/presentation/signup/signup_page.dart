@@ -3,29 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:instagram_replica/src/actions/index.dart';
 import 'package:instagram_replica/src/models/index.dart';
-import 'package:instagram_replica/src/presentation/mixin/dialog_mixin.dart';
 import 'package:instagram_replica/src/presentation/routes.dart';
 
-class LoginPage extends StatefulWidget {
-  @override
-  _LoginPageState createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> with DialogMixin {
-  final TextEditingController _email = TextEditingController();
-  final TextEditingController _password = TextEditingController();
-
-  void _onResponse(AppAction action) {
-    if (action is LoginError) {
-      showErrorDialog(context, 'Login Error', action.error);
-    }
-  }
+class SignupPage extends StatelessWidget {
+  const SignupPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: const Text('Signup'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -35,12 +22,15 @@ class _LoginPageState extends State<LoginPage> with DialogMixin {
               return Column(
                 children: <Widget>[
                   TextFormField(
-                    controller: _email,
                     decoration: const InputDecoration(
                       hintText: 'email',
                     ),
                     keyboardType: TextInputType.emailAddress,
-                    onChanged: (String value) {},
+
+                    onChanged: (String value) {
+                      print('value: $value');
+                      StoreProvider.of<AppState>(context).dispatch(UpdateRegistrationInfo(email: value));
+                    },
                     validator: (String value) {
                       if (!value.contains('@') || !value.contains('.')) {
                         return 'Please enter a valid email address.';
@@ -48,48 +38,28 @@ class _LoginPageState extends State<LoginPage> with DialogMixin {
                       return null;
                     },
                   ),
-                  const Divider(),
-                  TextFormField(
-                    controller: _password,
-                    decoration: const InputDecoration(
-                      hintText: 'password',
-                    ),
-                    keyboardType: TextInputType.visiblePassword,
-                    obscureText: true,
-                    onChanged: (String value) {},
-                    validator: (String value) {
-                      if (value.length < 6) {
-                        return 'Please enter a longer password.';
-                      }
-                      return null;
-                    },
-                  ),
                   const Spacer(),
                   FlatButton(
-                    child: const Text('Login'),
+                    child: const Text('Continue'),
                     onPressed: () {
                       if (Form.of(context).validate()) {
-                        StoreProvider.of<AppState>(context).dispatch(Login(
-                          email: _email.text,
-                          password: _password.text,
-                          response: _onResponse,
-                        ));
+                        Navigator.pushNamed(context, AppRoutes.username);
                       }
                     },
                   ),
                   const Divider(),
                   Text.rich(
                     TextSpan(
-                      text: 'Don\'t you have an account? ',
+                      text: 'Do you have an account? ',
                       children: <TextSpan>[
                         TextSpan(
-                          text: 'Sign Up!',
+                          text: 'Login!',
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              Navigator.pushNamed(context, AppRoutes.signup);
+                              Navigator.popUntil(context, ModalRoute.withName(AppRoutes.home));
                             },
                         ),
                       ],

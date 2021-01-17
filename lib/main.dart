@@ -32,9 +32,10 @@ class _InstagramReplicaState extends State<InstagramReplica> with InitMixin<Inst
               routes: AppRoutes.routes,
             ),
           );
-        } else if (snapshot.hasError) {
-          throw snapshot.error;
         } else {
+          if (snapshot.hasError) {
+            throw snapshot.error;
+          }
           return MaterialApp(
             title: 'Instagram Replica',
             theme: ThemeData.dark(),

@@ -7,3 +7,6 @@ import 'package:instagram_replica/src/models/index.dart';
 part 'index.freezed.dart';
 
 part 'login.dart';
+part 'signup.dart';
+part 'set.dart';
+part 'signout.dart';

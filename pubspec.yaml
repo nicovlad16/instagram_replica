@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: 1.0.0
+  cupertino_icons: ^1.0.0
 
   #firebase
   firebase_core: ^0.5.3
@@ -38,7 +38,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  analyzer: any
   build_runner: any
   built_value_generator: ^7.1.0
   freezed: ^0.12.0
