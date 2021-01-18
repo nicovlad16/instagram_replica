@@ -1,5 +1,5 @@
 import 'package:instagram_replica/src/actions/index.dart';
-import 'package:instagram_replica/src/data/index.dart';
+import 'package:instagram_replica/src/data/auth_api.dart';
 import 'package:instagram_replica/src/models/index.dart';
 import 'package:meta/meta.dart';
 import 'package:redux_epics/redux_epics.dart';

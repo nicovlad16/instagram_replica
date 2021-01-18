@@ -28,7 +28,7 @@ class UsernamePage extends StatelessWidget {
                         decoration: const InputDecoration(
                           hintText: 'username',
                         ),
-                        initialValue: info.email.split('@')[0],
+                        initialValue: info.email == null ? '' : info.email.split('@')[0],
                         keyboardType: TextInputType.name,
                         onChanged: (String value) {
                           StoreProvider.of<AppState>(context).dispatch(UpdateRegistrationInfo(username: value));

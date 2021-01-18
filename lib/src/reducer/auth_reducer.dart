@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:instagram_replica/src/actions/auth/index.dart';
 import 'package:instagram_replica/src/models/auth/index.dart';
 import 'package:redux/redux.dart';
 
-Reducer<AuthState> reducer = combineReducers(<Reducer<AuthState>>[
+Reducer<AuthState> authReducer = combineReducers(<Reducer<AuthState>>[
   TypedReducer<AuthState, LoginSuccessful>(_loginSuccessful),
   TypedReducer<AuthState, SignupSuccessful>(_signupSuccessful),
   TypedReducer<AuthState, UpdateRegistrationInfo>(_updateRegistrationInfo),
@@ -18,7 +17,6 @@ AuthState _signupSuccessful(AuthState state, SignupSuccessful action) {
 }
 
 AuthState _updateRegistrationInfo(AuthState state, UpdateRegistrationInfo action) {
-  print('email:${action.email}');
   return state.rebuild((AuthStateBuilder b) {
     if (action.email != null) {
       b.info.email = action.email;
