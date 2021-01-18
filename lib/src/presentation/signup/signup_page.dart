@@ -26,7 +26,6 @@ class SignupPage extends StatelessWidget {
                       hintText: 'email',
                     ),
                     keyboardType: TextInputType.emailAddress,
-
                     onChanged: (String value) {
                       print('value: $value');
                       StoreProvider.of<AppState>(context).dispatch(UpdateRegistrationInfo(email: value));
