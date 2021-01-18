@@ -74,7 +74,7 @@ class AuthApi {
     return appUser;
   }
 
-  Future<void> reset_password({@required String email}) async {
+  Future<void> resetPassword({@required String email}) async {
     await _auth.sendPasswordResetEmail(email: email);
   }
 }

@@ -17,7 +17,8 @@ class AuthEpics {
       TypedEpic<AppState, Login$>(_login),
       TypedEpic<AppState, Signup$>(_signup),
       TypedEpic<AppState, SignOut$>(_signOut),
-      TypedEpic<AppState, SignInWithGoogle$>(_signInWithGoogle)
+      TypedEpic<AppState, SignInWithGoogle$>(_signInWithGoogle),
+      TypedEpic<AppState, ResetPassword$>(_resetPassword),
     ]);
   }
 
@@ -59,5 +60,14 @@ class AuthEpics {
             .map((AppUser user) => SignInWithGoogle.successful(user))
             .onErrorReturnWith((dynamic error) => SignInWithGoogle.error(error))
             .doOnData(action.response));
+  }
+
+  Stream<AppAction> _resetPassword(Stream<ResetPassword$> actions, EpicStore<AppState> store) {
+    return actions //
+        .flatMap((ResetPassword$ action) => Stream<ResetPassword$>.value(action)
+            .asyncMap((ResetPassword$ action) => _api.resetPassword(email: action.email))
+            .mapTo(const ResetPassword.successful())
+            .onErrorReturnWith((dynamic error) => ResetPassword.error(error)));
+    // .doOnData(action.response));
   }
 }
