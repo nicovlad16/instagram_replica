@@ -17,6 +17,7 @@ class AuthEpics {
       TypedEpic<AppState, Login$>(_login),
       TypedEpic<AppState, Signup$>(_signup),
       TypedEpic<AppState, SignOut$>(_signOut),
+      TypedEpic<AppState, SignInWithGoogle$>(_signInWithGoogle)
     ]);
   }
 
@@ -48,6 +49,15 @@ class AuthEpics {
             .asyncMap((SignOut$ action) => _api.signOut())
             .mapTo(const SignOut.successful())
             .onErrorReturnWith((dynamic error) => SignOut.error(error))
+            .doOnData(action.response));
+  }
+
+  Stream<AppAction> _signInWithGoogle(Stream<SignInWithGoogle$> actions, EpicStore<AppState> store) {
+    return actions //
+        .flatMap((SignInWithGoogle$ action) => Stream<SignInWithGoogle$>.value(action)
+            .asyncMap((SignInWithGoogle$ action) => _api.signInWithGoogle())
+            .map((AppUser user) => SignInWithGoogle.successful(user))
+            .onErrorReturnWith((dynamic error) => SignInWithGoogle.error(error))
             .doOnData(action.response));
   }
 }
