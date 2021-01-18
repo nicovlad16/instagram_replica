@@ -74,7 +74,13 @@ class _LoginPageState extends State<LoginPage> with DialogMixin {
                         onPressed: () {
                           StoreProvider.of<AppState>(context).dispatch(SignInWithGoogle(response: _onResponse));
                         },
-                      )
+                      ),
+                      FlatButton(
+                        child: const Text('Reset Password'),
+                        onPressed: () {
+                          Navigator.pushNamed(context, AppRoutes.resetPassword);
+                        },
+                      ),
                     ],
                   ),
                   const Spacer(),

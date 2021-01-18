@@ -73,4 +73,8 @@ class AuthApi {
     await _firestore.doc('users/${result.user.uid}').set(appUser.json);
     return appUser;
   }
+
+  Future<void> reset_password({@required String email}) async {
+    await _auth.sendPasswordResetEmail(email: email);
+  }
 }
