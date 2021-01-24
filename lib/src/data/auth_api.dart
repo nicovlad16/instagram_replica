@@ -1,6 +1,8 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:instagram_replica/src/data/index.dart';
 import 'package:instagram_replica/src/models/index.dart';
 import 'package:meta/meta.dart';
 
@@ -33,7 +35,8 @@ class AuthApi {
       b
         ..uid = user.uid
         ..email = user.email
-        ..username = username;
+        ..username = username
+        ..searchIndex = ListBuilder<String>(<String>[username].searchIndex);
     });
 
     await _firestore.doc('users/${user.uid}').set(appUser.json);
@@ -67,8 +70,9 @@ class AuthApi {
       b
         ..uid = result.user.uid
         ..email = result.user.email
-        ..username = result.user.displayName
-        ..photoUrl = result.user.photoURL;
+        ..username = result.user.email.split('@').first
+        ..photoUrl = result.user.photoURL
+        ..searchIndex = ListBuilder<String>(<String>[result.user.email.split('@').first].searchIndex);
     });
     await _firestore.doc('users/${result.user.uid}').set(appUser.json);
     return appUser;
@@ -76,5 +80,16 @@ class AuthApi {
 
   Future<void> resetPassword({@required String email}) async {
     await _auth.sendPasswordResetEmail(email: email);
+  }
+
+  Future<List<AppUser>> searchUsers(String query) async {
+    final QuerySnapshot snapshot = await _firestore
+        .collection('users') //
+        .where('searchIndex', arrayContains: query)
+        .get();
+
+    return snapshot.docs //
+        .map((QueryDocumentSnapshot snapshot) => AppUser.fromJson(snapshot.data()))
+        .toList();
   }
 }

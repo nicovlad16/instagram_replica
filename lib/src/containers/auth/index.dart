@@ -9,3 +9,4 @@ import 'package:redux/redux.dart';
 part 'user_container.dart';
 
 part 'registration_info_container.dart';
+part 'search_result_container.dart';
